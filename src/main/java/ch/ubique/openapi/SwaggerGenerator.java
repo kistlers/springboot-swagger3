@@ -663,7 +663,7 @@ public class SwaggerGenerator extends AbstractMojo {
         return param;
     }
 
-    // extract paramertes from function
+    // extract parameters from function
     private List<Map<String, Object>> getParameters(
             Method controllerMethod, RequestMapping wrapper, Map<String, Object> methodMap) {
         List<Map<String, Object>> parameters = new ArrayList<>();
@@ -980,7 +980,7 @@ public class SwaggerGenerator extends AbstractMojo {
             }
 
         } catch (DependencyResolutionRequiredException e) {
-            new MojoExecutionException("Dependency resolution failed", e);
+            throw new MojoExecutionException("Dependency resolution failed", e);
         } catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
