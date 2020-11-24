@@ -11,6 +11,7 @@ import ch.ubique.openapi.wrapper.RequestParam;
 
 import edu.emory.mathcs.backport.java.util.Collections;
 
+import java.nio.charset.StandardCharsets;
 import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -996,7 +997,7 @@ public class SwaggerGenerator extends AbstractMojo {
         }
     }
 
-    private List<String> registeredTypes = new ArrayList<>();
+    private final List<String> registeredTypes = new ArrayList<>();
 
     private Map<String, Object> extractEnum(Class<?> objectClass) {
         try {
@@ -1365,9 +1366,8 @@ public class SwaggerGenerator extends AbstractMojo {
                 case STRING:
                     mappedType = "string";
                     if (documentation == null
-                            || (documentation != null
-                                    && (documentation.description() == null
-                                            || documentation.description().isBlank()))) {
+                            || documentation.description() == null
+                            || documentation.description().isBlank()) {
                         mapToAdd.put("pattern", format.pattern());
                     }
                     break;
@@ -1480,13 +1480,13 @@ public class SwaggerGenerator extends AbstractMojo {
                 offset += block.length;
             }
 
-            String sdata = new String(data, java.nio.charset.Charset.forName("UTF-8"));
+            String sdata = new String(data, StandardCharsets.UTF_8);
             int lnt = sdata.indexOf("LineNumberTable");
             if (lnt != -1) sdata = sdata.substring(lnt + "LineNumberTable".length() + 3);
             int cde = sdata.lastIndexOf("SourceFile");
             if (cde != -1) sdata = sdata.substring(0, cde);
 
-            MethodOffset mo[] = new MethodOffset[methods.length];
+            MethodOffset[] mo = new MethodOffset[methods.length];
 
             for (int i = 0; i < methods.length; ++i) {
                 int pos = -1;
