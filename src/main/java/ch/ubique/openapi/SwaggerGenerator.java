@@ -1343,15 +1343,18 @@ public class SwaggerGenerator extends AbstractMojo {
     private void mapPrimitiveTypeAndFormat(Map<String, Object> mapToAdd, String type) {
         String mappedType = javaToSwaggerLinkedHashMap.get(type);
         mapToAdd.put("type", mappedType);
-        if (type.equals("double")
-                || type.equals("float")
-                || type.equals("Double")
-                || type.equals("Float")) {
-            mapToAdd.put("format", type.toLowerCase());
-        } else if (type.equals("long") || type.equals("Long")) {
-            mapToAdd.put("format", type.toLowerCase());
-        } else if (type.equals("URL")) {
-            mapToAdd.put("pattern", "(https?|ftps?|file):\\/\\/((.+\\.)+)[A-z]{2,}((\\/.+)*)");
+        switch (type) {
+            case "double":
+            case "Double":
+            case "float":
+            case "Float":
+            case "long":
+            case "Long":
+                mapToAdd.put("format", type.toLowerCase());
+                break;
+            case "URL":
+                mapToAdd.put("pattern", "(https?|ftps?|file):\\/\\/((.+\\.)+)[A-z]{2,}((\\/.+)*)");
+                break;
         }
     }
 
@@ -1383,15 +1386,18 @@ public class SwaggerGenerator extends AbstractMojo {
             }
         }
         mapToAdd.put("type", mappedType);
-        if (type.equals("double")
-                || type.equals("float")
-                || type.equals("Double")
-                || type.equals("Float")) {
-            mapToAdd.put("format", type.toLowerCase());
-        } else if (type.equals("long") || type.equals("Long")) {
-            mapToAdd.put("format", type.toLowerCase());
-        } else if (type.equals("URL")) {
-            mapToAdd.put("pattern", "(https?|ftps?|file):\\/\\/((.+\\.)+)[A-z]{2,}((\\/.+)*)");
+        switch (type) {
+            case "double":
+            case "Double":
+            case "float":
+            case "Float":
+            case "long":
+            case "Long":
+                mapToAdd.put("format", type.toLowerCase());
+                break;
+            case "URL":
+                mapToAdd.put("pattern", "(https?|ftps?|file):\\/\\/((.+\\.)+)[A-z]{2,}((\\/.+)*)");
+                break;
         }
     }
 
