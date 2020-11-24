@@ -346,12 +346,12 @@ public class SwaggerGenerator extends AbstractMojo {
                     && !controllerMethod.isAnnotationPresent(deleteMapping)
                     && !controllerMethod.isAnnotationPresent(patchMapping)) continue;
 
-            // Get a wrapper arround the Annotation
+            // Get a wrapper around the Annotation
 
             RequestMapping wrapper =
                     new RequestMapping(getRequestMappingForMethod(controllerMethod));
-            // the controller method has a dictionar of httpreturncode:text
-            Documentation docWrapper;
+            // the controller method has a dictionary of httpreturncode:text
+            Documentation docWrapper = null;
             Map<String, String> returnCodeToDescription = new LinkedHashMap<>();
 
             if (controllerMethod.isAnnotationPresent(documentation)) {
