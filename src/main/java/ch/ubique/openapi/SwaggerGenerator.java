@@ -1178,9 +1178,7 @@ public class SwaggerGenerator extends AbstractMojo {
                         Collection<Map<String, Object>> innerModDef =
                                 getModelDefinition(field.getName(), actualClass);
                         // add all additional found definitions
-                        for (Map<String, Object> defi : innerModDef) {
-                            definitions.add(defi);
-                        }
+                        definitions.addAll(innerModDef);
                     }
                     if (isPrimitive(actualClass)) {
                         ref.put(
@@ -1245,9 +1243,7 @@ public class SwaggerGenerator extends AbstractMojo {
                             Collection<Map<String, Object>> innerModDef =
                                     getModelDefinition(field.getName(), actualClass);
                             // add all additional found definitions
-                            for (Map<String, Object> defi : innerModDef) {
-                                definitions.add(defi);
-                            }
+                            definitions.addAll(innerModDef);
                         } else {
                             lowerLevel.put("type", "array");
                             Map<String, Object> tmp = new LinkedHashMap<>();
@@ -1265,9 +1261,7 @@ public class SwaggerGenerator extends AbstractMojo {
                         Collection<Map<String, Object>> innerModDef =
                                 getModelDefinition(field.getName(), actualClass);
                         // add all additional found definitions
-                        for (Map<String, Object> defi : innerModDef) {
-                            definitions.add(defi);
-                        }
+                        definitions.addAll(innerModDef);
                         addProp.put(
                                 "$ref", "#/components/schemas/" + actualClass.getCanonicalName());
                     }
@@ -1307,9 +1301,7 @@ public class SwaggerGenerator extends AbstractMojo {
                     Collection<Map<String, Object>> innerModDef =
                             getModelDefinition(field.getName(), type);
                     // add all additional found definitions
-                    for (Map<String, Object> defi : innerModDef) {
-                        definitions.add(defi);
-                    }
+                    definitions.addAll(innerModDef);
                 }
             }
         }
