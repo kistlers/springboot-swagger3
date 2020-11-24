@@ -59,7 +59,6 @@ import javax.lang.model.type.NullType;
 @Mojo(
         name = "springboot-swagger-3",
         requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME,
-        requiresProject = true,
         defaultPhase = LifecyclePhase.COMPILE)
 public class SwaggerGenerator extends AbstractMojo {
     @Parameter(defaultValue = "${project}", required = true, readonly = true)
@@ -187,7 +186,7 @@ public class SwaggerGenerator extends AbstractMojo {
     // get the first type which is not generic
     private Pair<Class<?>, Integer> getInnerClassFromGeneric(Class<?> container, Type type)
             throws Exception {
-        Class<?> innerClass = null;
+        Class<?> innerClass;
         int nestedReturnValueLayer = 0;
 
         // Check for generics of the form List<T>, Map<K,V> ResponseEntity<E> and so on
@@ -288,7 +287,7 @@ public class SwaggerGenerator extends AbstractMojo {
             Class<?> returnType, RequestMapping wrapper, int nestedReturnValueLayer) {
         LinkedHashMap<String, Object> content = new LinkedHashMap<>();
         // default response product is application/json
-        String product = "";
+        String product;
         List<String> headers = new ArrayList<>();
         Collections.addAll(headers, wrapper.headers());
 
@@ -351,7 +350,7 @@ public class SwaggerGenerator extends AbstractMojo {
             RequestMapping wrapper =
                     new RequestMapping(getRequestMappingForMethod(controllerMethod));
             // the controller method has a dictionar of httpreturncode:text
-            Documentation docWrapper = null;
+            Documentation docWrapper;
             Map<String, String> returnCodeToDescription = new LinkedHashMap<>();
 
             if (controllerMethod.isAnnotationPresent(documentation)) {
@@ -403,7 +402,7 @@ public class SwaggerGenerator extends AbstractMojo {
                                     theMethod, (x) -> getRequestMethod(controllerMethod, wrapper));
 
             // 0 means the object is directly the return value; 1 means one list, 2 two ....
-            int nestedReturnValueLayer = 0;
+            int nestedReturnValueLayer;
 
             // get class fallback (if it is not a generic)
             Class<?> actualClass = controllerMethod.getReturnType();
@@ -878,7 +877,7 @@ public class SwaggerGenerator extends AbstractMojo {
 
     private List<Class<?>> getControllerClasses() throws MojoExecutionException {
         List<Class<?>> requestClasses = new ArrayList<>();
-        List<String> classpathElements = null;
+        List<String> classpathElements;
         try {
             classpathElements = project.getCompileClasspathElements();
 
