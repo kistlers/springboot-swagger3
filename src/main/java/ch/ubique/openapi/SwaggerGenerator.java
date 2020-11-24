@@ -67,10 +67,10 @@ public class SwaggerGenerator extends AbstractMojo {
     @Parameter(defaultValue = "ch.ubique.viadi", required = true)
     String[] basePackages;
 
-    @Parameter(defaultValue = "", required = false)
+    @Parameter
     String[] blackListedPackages;
 
-    @Parameter(defaultValue = "", required = false)
+    @Parameter
     String[] ignoredTypes;
 
     @Parameter(required = true)
@@ -82,7 +82,8 @@ public class SwaggerGenerator extends AbstractMojo {
     @Parameter(defaultValue = "swagger.yaml")
     String outFile;
 
-    @Parameter String[] apiUrls;
+    @Parameter
+    String[] apiUrls;
 
     @Parameter(defaultValue = "1.0-SNAPSHOT")
     String apiVersion;
